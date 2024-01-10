@@ -3,9 +3,142 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  "/todos/{todo_id}/items":
+    get:
+      summary: Retrieves all items of a todo list
+      parameters:
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: items found
+    post:
+      summary: Creates an item for a todo list
+      parameters:
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: item created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+              required:
+              - name
+              - done
+  "/todos/{todo_id}/items/{id}":
+    put:
+      summary: Updates an item of a todo list
+      parameters:
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: item updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                done:
+                  type: boolean
+    delete:
+      summary: Deletes an item of a todo list
+      parameters:
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: item deleted
+  "/todos":
+    get:
+      summary: Retrieves all todo lists
+      responses:
+        '200':
+          description: todo lists found
+    post:
+      summary: Creates a todo list
+      parameters: []
+      responses:
+        '201':
+          description: todo list created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                created_by:
+                  type: integer
+              required:
+              - title
+              - created_by
+  "/todos/{id}":
+    put:
+      summary: Updates a todo list
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: todo list updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+    delete:
+      summary: Deletes a todo list
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: todo list deleted
 servers:
-- url: https://{defaultHost}
+- url: http://localhost:3000
   variables:
     defaultHost:
       default: www.example.com
