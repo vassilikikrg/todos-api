@@ -45,6 +45,14 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0'
 end
 
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
+
+group :development, :test do
+  gem 'rswag-specs'
+end
+
 group :test do
   # the other gems needed
   gem 'factory_bot_rails', '~> 4.0'
